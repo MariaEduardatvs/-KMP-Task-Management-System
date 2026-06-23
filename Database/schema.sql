@@ -27,3 +27,8 @@ CREATE TABLE tasks (
     FOREIGN KEY (assigned_to) REFERENCES users(id) --foreign key to identify assigned_to using user id from users table
 );
 
+-- SUBTASKS
+CREATE TABLE subtasks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    task_id INT NOT NULL,
+    
