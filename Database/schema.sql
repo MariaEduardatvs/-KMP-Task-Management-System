@@ -29,6 +29,11 @@ CREATE TABLE tasks (
 
 -- SUBTASKS
 CREATE TABLE subtasks (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY, -- Subtask identifier
+    -- ID of task
     task_id INT NOT NULL,
+    title VARCHAR(200) NOT NULL,  -- Subtask title cannot be null
+    completed BOOLEAN DEFAULT FALSE, -- Indicates whether the subtask has been completed
     
+    FOREIGN KEY (task_id) REFERENCES tasks(id) );  -- References the task to which the subtask belongs
+
