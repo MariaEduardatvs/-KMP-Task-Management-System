@@ -1,3 +1,17 @@
 body{
     font-family: Arial;
+    background-color: #2b2222;
+}
+.custom-nav {
+    background-color: #1a1414;
+}
+.form-card {
+    background-color: #3b2f2f;
+    border: none;
+    border-radius: 10px;
+}
+.custom-input {
+    background-color: #4a3d3d;
+    border: 1px solid #5a4b4b;
+    color: white;
 }
