@@ -1,0 +1,24 @@
+import mysql.connector
+
+def createConnection():
+        try:
+                conn = mysql.connector.connect(
+                        host='127.0.0.1',
+                        user='root',
+                        password='',
+                        database='task_manager'
+                )
+                return conn
+        except mysql.connector.Error as err:
+                print(f"error:{err}")
+                return None
+def getAllRecords(conn):
+        mycursor = conn.cursor(dictionary=True)
+        mycursor.execute("SELECT * FROM tasks")
+        return mycursor.fetchall()
+def addRecords(conn,data):
+        mycursor = conn.cursor()
+        sql = "INSERT INTO tasks(name, description) VALUES (%s, %s)"
+        val = (data['name'], data['description'])
+        mycursor.execute(sql, val)
+        conn.commit()
