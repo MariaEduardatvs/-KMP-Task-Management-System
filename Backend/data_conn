@@ -7,7 +7,7 @@ def createConnection():
                         host='127.0.0.1',
                         user='root',
                         password='',
-                        database='task_manager'
+                        database='kmp_task_management'
                 )
                 return conn
         except mysql.connector.Error as err:
