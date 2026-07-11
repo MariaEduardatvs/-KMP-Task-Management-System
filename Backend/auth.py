@@ -14,4 +14,13 @@ auth = Blueprint("auth", __name__)
 @auth.route("/register", methods=["POST"])
 def register():
 
+#get data sent in JSON format
+    data = request.json
+#get username and password from json
+    username = data["username"]
+    password = data["password"]
+
+    conn = createConnection() #connection 
+
+cursor = conn.cursor(dictionary=True) #cursor to execute sql and  dictionary=True to change from tupla to dictionary 
 
