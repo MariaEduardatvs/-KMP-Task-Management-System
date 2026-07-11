@@ -22,7 +22,7 @@ def getAllRecords(conn):
 #give data
 def addRecords(conn,data):
         mycursor = conn.cursor()
-        sql = "INSERT INTO tasks(name, description) VALUES (%s, %s)"
-        val = (data['name'], data['description'])
+        sql = "INSERT INTO tasks(title, description, created_by) VALUES (%s, %s, %s)"
+        val = (data['title'], data['description'],  data['created_by'])
         mycursor.execute(sql, val)
         conn.commit()
