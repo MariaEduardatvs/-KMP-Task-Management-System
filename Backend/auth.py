@@ -113,6 +113,14 @@ def login():
     })
 
 
+# LOGOUT
+@auth.route("/logout", methods=["POST"])
+def logout():
 
+     session.clear()
+
+     return jsonify({
+        "message":"Logout successful!"
+    })
 
 
