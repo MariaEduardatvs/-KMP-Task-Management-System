@@ -2,95 +2,70 @@
 
 const registerForm = document.getElementById("registerForm");
 
-if(registerForm){
+if (registerForm) {
+  registerForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-registerForm.addEventListener("submit",async(e)=>{
+    const username = document.getElementById("username").value;
 
-e.preventDefault();
+    const password = document.getElementById("password").value;
 
-const username=document.getElementById("username").value;
+    const response = await fetch(
+      "/register",
 
-const password=document.getElementById("password").value;
+      {
+        method: "POST",
 
-const response=await fetch(
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-"http://127.0.0.1:5000/register",
+        body: JSON.stringify({
+          username,
 
-{
+          password,
+        }),
+      },
+    );
 
-method:"POST",
+    const result = await response.json();
 
-headers:{
-
-"Content-Type":"application/json"
-
-},
-
-body:JSON.stringify({
-
-username,
-
-password
-
-})
-
+    alert(result.message);
+  });
 }
-
-);
-
-const result=await response.json();
-
-alert(result.message);
-
-});
-
-}
-
 
 // LOGIN
 
-const loginForm=document.getElementById("loginForm");
+const loginForm = document.getElementById("loginForm");
 
-if(loginForm){
+if (loginForm) {
+  loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-loginForm.addEventListener("submit",async(e)=>{
+    const username = document.getElementById("loginUsername").value;
 
-e.preventDefault();
+    const password = document.getElementById("loginPassword").value;
 
-const username=document.getElementById("loginUsername").value;
+    const response = await fetch(
+      "/login",
 
-const password=document.getElementById("loginPassword").value;
+      {
+        method: "POST",
 
-const response=await fetch(
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-"http://127.0.0.1:5000/login",
+        body: JSON.stringify({
+          username,
 
-{
+          password,
+        }),
+      },
+    );
 
-method:"POST",
+    const result = await response.json();
 
-headers:{
-
-"Content-Type":"application/json"
-
-},
-
-body:JSON.stringify({
-
-username,
-
-password
-
-})
-
-}
-
-);
-
-const result=await response.json();
-
-alert(result.message);
-
-});
-
+    alert(result.message);
+  });
 }
