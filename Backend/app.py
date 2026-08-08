@@ -53,7 +53,7 @@ def add_task():
 
     addRecords(conn, data)
 
-    return redirect("/taskspys")
+    return redirect("/tasks")
 
 
 if __name__ == "__main__":
