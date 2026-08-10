@@ -38,16 +38,30 @@
                 >Create Task</a
               >
             </li>
+            <li class="nav-item me-3">
+              <a
+                class="nav-link btn btn-outline-warning p-2 text-white"
+                href="/login"
+                >Login</a
+              >
+            </li>
+            <li class="nav-item me-3">
+              <a
+                class="nav-link btn btn-outline-warning p-2 text-white"
+                href="/register"
+                >Register</a
+              >
+            </li>
           </ul>
         </div>
       </div>
     </nav>
   </header>
   <body>
-    <div class="container mt-5">
+    <div class="container mt-5 pt-5">
       <h1 class="text-center mb-4 text-light">Task Management System</h1>
 
-      <div class="card form-card p-3">
+      <div class="card form-card p-3 mb-5">
         <form action="/add_task" method="POST">
           <div class="mb-3">
             <label for="taskName" class="form-label text-light"
@@ -73,6 +87,7 @@
               required
             ></textarea>
           </div>
+ 
 
           <div class="mb-3">
             <label for="dueDate" class="form-label text-light">
@@ -84,7 +99,6 @@
               class="form-control custom-input"
               name="due_date"
               id="dueDate"
-              required
             />
           </div>
 
@@ -93,118 +107,112 @@
           </button>
         </form>
       </div>
-
+ 
       <h2 class="mt-5 text-light">Task list:</h2>
       {% if tasks %}
       <ul class="list-group mt-3">
-        
         {% for task in tasks %}
         <li class="list-group-item form-card text-light mb-2" data-task-id="{{ task.id }}">
-            <!-- Task information -->
-             <div class="d-flex justify-content-between align-items-start">
+          <!-- Task information -->
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <h5 class="mb-1 text-warning">
+                {{ task.title }}
+              </h5>
+              <p class="mb-1">
+                {{ task.description }}
+              </p>
+              <small class="text-muted">
+                Due: {{ task.due_date or 'No due date' }}
                 
-                <div
-                <h5 class="mb-1 text-warning">
-                    {{ task.title }}
-                </h5>
-                
-                <p class="mb-1">
-                    {{ task.description }}
-                </p>
-                
-                <small class="text-muted">
-                    Due: {{ task.due_date or 'No due date' }}
-                    |
-                    Status: {{ task.status or 'PENDING' }}
-                </small>
+                Status: {{ task.status or 'PENDING' }}
+              </small>
             </div>
-            
-            <!-- Task buttons -->
-             <div class="d-flex gap-2 flex-wrap">
-                
-                <!-- Complete -->
-                 <button type="button" class="btn btn-success btn-sm complete-task-btn" data-task-id="{{ task.id }}"">
-                    Complete
-                </button>
-                
-                <!-- Edit -->
-                 <button type="button" class="btn btn-warning btn-sm edit-task-btn" data-task-id="{{ task.id }}"">
-                    Edit
-                </button>
-                
-                <!-- Delete -->
-                 <button type="button" class="btn btn-danger btn-sm delete-task-btn" data-task-id="{{ task.id }}">
-                    Delete
-                </button>
-            </div>
-        </div>
-        
-        <!-- Edit form -->
-         <div id="edit-form-{{ task.id }}" class="mt-3 d-none">
-            <input 
-            type="text"
-            id="edit-title-{{ task.id }}"
-            class="form-control mb-2"
-            value="{{ task.title }}"
-            placeholder="Task title"
-            />
-            
-            <textarea
-            id="edit-description-{{ task.id }}"
-            class="form-control mb-2"
-            rows="3"
-            placeholder="Task description"
-            >{{ task.description }}</textarea>
-            
-            <input
-            type="datetime-local"
-            id="edit-due-date-{{ task.id }}"
-            class="form-control mb-2"
-            value="{{ task.due_date }}"
-            />
-            
-            <button type="button" class="btn btn-warning btn-sm save-task-btn" data-task-id="{{ task.id }}">
-                Save Changes
-            </button>
-            
-            <button type="button" class="btn btn-secondary btn-sm cancel-edit-btn" data-task-id="{{ task.id }}">
-                Cancel
-            </button>
-        </div>
 
-        <!-- Subtasks -->
-        <div class="mt-3">
-            <h6 class="text-warning">Sub-tasks</h6>
-            <div id="subtasks-{{ task.id }}" class="mb-3">
-                Loading sub-tasks...
+
+            <!-- Task buttons -->
+            <div class="d-flex gap-2 flex-wrap"> 
+              <!-- Complete -->
+              <button type="button" class="btn btn-success btn-sm complete-task-btn" data-task-id="{{ task.id }}">
+                Complete
+              </button>
+
+              <!-- Edit --> 
+              <button type="button" class="btn btn-warning btn-sm edit-task-btn" data-task-id="{{ task.id }}">
+                Edit
+              </button>
+
+              <!-- Delete  -->
+              <button type="button" class="btn btn-danger btn-sm delete-task-btn" data-task-id="{{ task.id }}">
+                Delete
+              </button>
             </div>
-            
+          </div>
+
+          <!-- Edit form -->
+          <div id="edit-form-{{ task.id }}" class="mt-3 d-none">
+            <input
+              type="text"
+              id="edit-title-{{ task.id }}"
+              class="form-control mb-2"
+              value="{{ task.title }}"
+              placeholder="Task title"
+            />
+
+            <textarea
+              id="edit-description-{{ task.id }}"
+              class="form-control mb-2"
+              rows="3"
+              placeholder="Task description"
+            >{{ task.description }}</textarea>
+
+            <input
+              type="datetime-local"
+              id="edit-due-date-{{ task.id }}"
+              class="form-control mb-2"
+              value="{{ task.due_date }}"
+            />
+
+            <button type="button" class="btn btn-warning btn-sm save-task-btn" data-task-id="{{ task.id }}">
+              Save Changes
+            </button>
+
+            <button type="button" class="btn btn-secondary btn-sm cancel-edit-btn" data-task-id="{{ task.id }}">
+              Cancel
+            </button>
+          </div>
+
+          <!-- Subtasks -->
+          <div class="mt-3">
+            <h6 class="text-warning">Sub-tasks</h6>
+            <div id="subtasks-{{ task.id }}" class="mb-3">  
+              Loading sub-tasks...
+            </div>
+
             <div class="input-group">
-                <input
+              <input
                 type="text"
                 id="subtask-title-{{ task.id }}"
                 class="form-control"
-                placeholder="Enter sub-task"
-                />
-                
-                <button type="button" class="btn btn-warning add-subtask-btn" data-task-id="{{ task.id }}">
-                    Add Sub-task
-                </button>
+                placeholder="Enter sub-task" 
+              />
+
+              <button type="button" class="btn btn-warning add-subtask-btn" data-task-id="{{ task.id }}">
+                Add Sub-task
+              </button>
             </div>
-        </div>
-    </li>
-    
-    {% endfor %}
-    </ul>
+          </div>
+        </li>
+        {% endfor %}  
+      </ul>
 
-    {% else %}
-    
-    <p class="text-light mt-3">
+      {% else %}
+      <p class="text-light mt-3">
         No tasks yet.
-    </p>
+      </p>
+      {% endif %}
+    </div>
 
-    {% endif %}
- 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
   </body>
 </html>
