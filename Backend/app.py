@@ -1,13 +1,20 @@
-from flask import Flask, render_template, request, redirect
+import os
+from flask import Flask, render_template, request, redirect, session
 from auth import auth
 from task import tasks
 from data_conn import createConnection, getAllRecords, addRecords
+import os
+from dotenv import load_dotenv
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FRONTEND_DIR = os.path.join(BASE_DIR, "..", "Frontend")
+
+load_dotenv()
 
 app = Flask(__name__,
-            template_folder="../Frontend",
-            static_folder="../Frontend")
-app.secret_key = "kmp-task-management-secret"
+            template_folder=FRONTEND_DIR,
+            static_folder=FRONTEND_DIR)
+app.secret_key = os.getenv("SECRET_KEY")
 
 #Register authentication routes
 app.register_blueprint(auth)
@@ -45,11 +52,15 @@ def tasks_page():
 @app.route("/add_task", methods=["POST"])
 def add_task():
 
+    user_id =session.get("user_id")
+    if not user_id:
+        return redirect("/login")
+
     data = {
         "title": request.form["title"],
         "description": request.form["description"],
         "due_date": request.form.get("due_date"),
-        "created_by": 1, #temp user id
+        "created_by": session["user_id"],
         "assigned_to": None
         }
 

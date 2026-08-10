@@ -1,13 +1,17 @@
+import os
 import mysql.connector
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # database conn setup
 def createConnection():
         try:
                 conn = mysql.connector.connect(
-                        host='127.0.0.1',
-                        user='root',
-                        password='password', #Local development only - move to environment variables before AWS deployment
-                        database='kmp_task_management'
+                        host=os.getenv("DB_HOST"),
+                        user=os.getenv("DB_USER"),
+                        password=os.getenv("DB_PASSWORD"),
+                        database=os.getenv("DB_NAME")
                 )
                 return conn
         except mysql.connector.Error as err:
