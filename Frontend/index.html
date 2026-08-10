@@ -53,6 +53,33 @@
         </div>
       </nav>
     </header>
+
+    <div class="container mt-5 pt-5">
+      <h1 class="text-center mb-4 text-light">Task Management System</h1>
+
+      <h2 class="mt-5 text-light">Task list:</h2>
+      {% if tasks %}
+        <ul class="list-group mt-3">
+          {% for task in tasks %}
+          <li class="list-group-item form-card text-light mb-2">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <h5 class="mb-1 text-warning">{{ task.title }}</h5>
+                <p class="mb-1">{{ task.description }}</p>
+                <small class="text-muted">Due: {{ task.due_date or 'No due date' }}  Status: {{ task.status or 'PENDING' }}</small>
+              </div>
+              <form action="/delete_task/{{ task.id }}" method="POST" onsubmit="return confirm('Delete this task?');">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+              </form>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-light mt-3">No tasks yet. <a href="/tasks" class="text-warning">Create one</a>.</p>
+      {% endif %}
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
   </body>
-  <script src="script.js"></script>
 </html>

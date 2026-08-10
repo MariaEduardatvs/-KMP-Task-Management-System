@@ -44,7 +44,7 @@
     </nav>
   </header>
   <body>
-    <div class="container mt-5">
+    <div class="container mt-5 pt-5">
       <h1 class="text-center mb-4 text-light">Task Management System</h1>
 
       <div class="card form-card p-3">
@@ -73,6 +73,21 @@
               required
             ></textarea>
           </div>
+
+          <div class="mb-3">
+            <label for="dueDate" class="form-label text-light">
+              Due date
+            </label>
+
+            <input
+              type="date"
+              class="form-control custom-input"
+              name="due_date"
+              id="dueDate"
+              required
+            />
+          </div>
+
           <button type="submit" class="btn btn-warning fw-bold text-dark">
             Add Task
           </button>
@@ -80,7 +95,26 @@
       </div>
 
       <h2 class="mt-5 text-light">Task list:</h2>
-      <ul id="taskList" class="list-group mt-3"></ul>
+      {% if tasks %}
+        <ul class="list-group mt-3">
+          {% for task in tasks %}
+          <li class="list-group-item form-card text-light mb-2">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <h5 class="mb-1 text-warning">{{ task.title }}</h5>
+                <p class="mb-1">{{ task.description }}</p>
+                <small class="text-muted">Due: {{ task.due_date or 'No due date' }} | Status: {{ task.status or 'PENDING' }}</small>
+              </div>
+              <form action="/delete_task/{{ task.id }}" method="POST" onsubmit="return confirm('Delete this task?');">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+              </form>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-light mt-3">No tasks yet.</p>
+      {% endif %}
     </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
