@@ -4,17 +4,13 @@ import os
 import sys
 import pytest
 
-# Add the Backend folder to Python's search path.
-# This allows the tests to import the Flask application.
-sys.path.append(
-    os.path.abspath(
-        os.path.join(
-            os.path.dirname(__file__),
-            "..",
-            "Backend"
-        )
-    )
+PROJECT_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..")
 )
+
+BACKEND_PATH = os.path.join(PROJECT_ROOT, "Backend")
+
+sys.path.insert(0, BACKEND_PATH)
 
 # Import the Flask application.
 from app import app

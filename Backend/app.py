@@ -48,11 +48,12 @@ def add_task():
     data = {
         "title": request.form["title"],
         "description": request.form["description"],
-        "created_by": 1 #temp user id
+        "due_date": request.form.get("due_date"),
+        "created_by": 1, #temp user id
+        "assigned_to": None
         }
 
     addRecords(conn, data)
-
     return redirect("/tasks")
 
 

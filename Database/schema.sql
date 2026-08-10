@@ -37,3 +37,30 @@ CREATE TABLE subtasks (
     
     FOREIGN KEY (task_id) REFERENCES tasks(id) );  -- References the task to which the subtask belongs
 
+
+-- Testing reset --
+USE kmp_task_management;
+
+DELETE FROM tasks
+WHERE created_by IN (
+    SELECT id
+    FROM users
+    WHERE username IN (
+        'pytest_user_01',
+        'duplicate_user',
+        'login_user',
+        'task_user'
+    )
+);
+
+DELETE FROM users
+WHERE username IN (
+    'pytest_user_01',
+    'duplicate_user',
+    'login_user',
+    'task_user'
+);
+
+SELECT * FROM users;
+
+SELECT * FROM tasks;

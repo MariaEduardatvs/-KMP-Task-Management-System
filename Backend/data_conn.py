@@ -6,7 +6,7 @@ def createConnection():
                 conn = mysql.connector.connect(
                         host='127.0.0.1',
                         user='root',
-                        password='Dudatavares23', #Local development only - move to environment variables before AWS deployment
+                        password='password', #Local development only - move to environment variables before AWS deployment
                         database='kmp_task_management'
                 )
                 return conn
