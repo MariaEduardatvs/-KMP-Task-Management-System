@@ -57,7 +57,7 @@ def create_task():
         VALUES(%s,%s,%s,%s,%s)
         """,
 
-        (title, description, due_date, created_by, None)
+        (title, description, due_date, created_by, assigned_to)
     )
 
     conn.commit()
