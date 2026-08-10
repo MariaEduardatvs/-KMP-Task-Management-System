@@ -20,8 +20,8 @@ def getAllRecords(conn):
 
 def addRecords(conn, data):
     mycursor = conn.cursor()
-    sql = "INSERT INTO tasks(title, description, due_date, created_by) VALUES (%s, %s, %s, %s)"
-    val = (data['title'], data['description'], data.get('due_date'), data['created_by'])
+    sql = "INSERT INTO tasks(title, description, due_date, created_by, assigned_to) VALUES (%s, %s, %s, %s, %s)"
+    val = (data['title'], data['description'], data.get('due_date'), data['created_by'], data.get('assigned_to'))
     mycursor.execute(sql, val)
     conn.commit()
 

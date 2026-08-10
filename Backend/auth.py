@@ -122,5 +122,3 @@ def logout():
      return jsonify({
         "message":"Logout successful!"
     })
-
-

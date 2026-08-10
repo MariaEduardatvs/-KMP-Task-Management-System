@@ -38,6 +38,20 @@
                 >Create Task</a
               >
             </li>
+            <li class="nav-item me-3">
+              <a
+                class="nav-link btn btn-outline-warning p-2 text-white"
+                href="/login"
+                >Login</a
+              >
+            </li>
+            <li class="nav-item me-3">
+              <a
+                class="nav-link btn btn-outline-warning p-2 text-white"
+                href="/register"
+                >Register</a
+              >
+            </li>
           </ul>
         </div>
       </div>
@@ -47,7 +61,7 @@
     <div class="container mt-5 pt-5">
       <h1 class="text-center mb-4 text-light">Task Management System</h1>
 
-      <div class="card form-card p-3">
+      <div class="card form-card p-3 mb-5">
         <form action="/add_task" method="POST">
           <div class="mb-3">
             <label for="taskName" class="form-label text-light"
@@ -84,7 +98,6 @@
               class="form-control custom-input"
               name="due_date"
               id="dueDate"
-              required
             />
           </div>
 
@@ -94,7 +107,7 @@
         </form>
       </div>
 
-      <h2 class="mt-5 text-light">Task list:</h2>
+      <h2 class="mt-5 text-light">Task list:</h2> 
       {% if tasks %}
         <ul class="list-group mt-3">
           {% for task in tasks %}
@@ -103,7 +116,7 @@
               <div>
                 <h5 class="mb-1 text-warning">{{ task.title }}</h5>
                 <p class="mb-1">{{ task.description }}</p>
-                <small class="text-muted">Due: {{ task.due_date or 'No due date' }} | Status: {{ task.status or 'PENDING' }}</small>
+                <small class="text-muted">Due: {{ task.due_date or 'No due date' }}  Status: {{ task.status or 'PENDING' }}</small>
               </div>
               <form action="/delete_task/{{ task.id }}" method="POST" onsubmit="return confirm('Delete this task?');">
                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
