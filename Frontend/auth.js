@@ -46,26 +46,23 @@ if (loginForm) {
 
     const password = document.getElementById("loginPassword").value;
 
-    const response = await fetch(
-      "/login",
-
-      {
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify({
-          username,
-
-          password,
-        }),
+    const response = await fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    });
 
     const result = await response.json();
 
-    alert(result.message);
+    // If login was successful, go to the task page
+    if (response.ok) {
+      window.location.href = "/tasks";
+    }
   });
 }
