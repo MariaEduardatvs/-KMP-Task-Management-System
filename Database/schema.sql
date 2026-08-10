@@ -35,7 +35,7 @@ CREATE TABLE subtasks (
     title VARCHAR(200) NOT NULL,  -- Subtask title cannot be null
     completed BOOLEAN DEFAULT FALSE, -- Indicates whether the subtask has been completed
     
-    FOREIGN KEY (task_id) REFERENCES tasks(id) );  -- References the task to which the subtask belongs
+    FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE);  -- References the task to which the subtask belongs
 
 
 -- Testing reset --
