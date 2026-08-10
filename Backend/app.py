@@ -3,14 +3,18 @@ from flask import Flask, render_template, request, redirect, session
 from auth import auth
 from task import tasks
 from data_conn import createConnection, getAllRecords, addRecords
+import os
+from dotenv import load_dotenv
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FRONTEND_DIR = os.path.join(BASE_DIR, "..", "Frontend")
 
+load_dotenv()
+
 app = Flask(__name__,
             template_folder=FRONTEND_DIR,
             static_folder=FRONTEND_DIR)
-app.secret_key = "kmp-task-management-secret"
+app.secret_key = os.getenv("SECRET_KEY")
 
 #Register authentication routes
 app.register_blueprint(auth)
